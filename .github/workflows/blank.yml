@@ -23,10 +23,10 @@ jobs:
            echo ${{ env.RELEASE_TAG }}
            tg=(${RELEASE_TAG//// })
            etag=${tg[1]}
-           echo '::set-output name=tag::$(etag)'
+          
          
         - name: Print etag
           run: |
-            echo ${{steps.extag.outputs.tag}}
+            echo $etag
            
            
