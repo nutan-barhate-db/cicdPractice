@@ -20,5 +20,8 @@ jobs:
           run: |
            echo $RELEASE_TAG
            echo ${{ env.RELEASE_TAG }}
-           etag=(${RELEASE_TAG//// })
-           echo ${etag[1]}
+           tg=(${RELEASE_TAG//// })
+           etag=tg[1]
+           echo ${etag}
+           
+           
