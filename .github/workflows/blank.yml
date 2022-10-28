@@ -22,11 +22,11 @@ jobs:
            echo $RELEASE_TAG5
            echo ${{ env.RELEASE_TAG }}
            tg=(${RELEASE_TAG//// })
-           etag=${tg[1]}
+           echo "ETAG=${tg[1]}" >> $GITHUB_ENV
           
          
         - name: Print etag
           run: |
-            echo $etag
+            echo $ETAG
            
            
