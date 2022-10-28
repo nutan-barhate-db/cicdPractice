@@ -8,6 +8,8 @@ on:
 jobs:
   release_tag:
       runs-on: ubuntu-latest
+      env:
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
@@ -28,5 +30,7 @@ jobs:
         - name: Print etag
           run: |
             echo $ETAG
-           
-           
+            git tag -a v${ETAG} -m "tag version v${ETAG}" 
+            git push -u origin v${ETAG}
+            git tag
+            
