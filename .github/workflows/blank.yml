@@ -1,6 +1,9 @@
 name: Release222
 
 on:
+  push:
+    branches:
+      - release/*
   pull_request:
     branches:
     - release/*
@@ -37,7 +40,7 @@ jobs:
             git tag
             
   increment_tag:
-      if: github.event_name == 'pull_request'
+      #if: github.event_name == 'pull_request'
       runs-on: ubuntu-latest
       env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,4 +51,7 @@ jobs:
             fetch-depth: 0
         - name: print
           run: echo "test"
-          
+        - name: print latest tag and increment patch
+          run: |
+           latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+           echo $latestTag
