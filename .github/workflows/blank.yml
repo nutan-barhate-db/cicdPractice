@@ -24,7 +24,7 @@ jobs:
            echo $RELEASE_TAG5
            echo ${{ env.RELEASE_TAG }}
            tg=(${RELEASE_TAG//// })
-           ETAG=${tg[1]}.0 >> $GITHUB_ENV
+           ETAG=${tg[1]} >> $GITHUB_ENV
            echo $ETAG
           
          
