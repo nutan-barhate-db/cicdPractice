@@ -55,9 +55,6 @@ jobs:
           run: |
            latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
            echo $latestTag
-           #git tag -a $latestTag ++1 -m "Release $latestTag ++1"
-           #VERSION=`git describe --abbrev=0 --tags`
-           #echo $VERSION
            #replace . with space so can split into an array
            VERSION_BITS=(${latestTag//./ })
 
@@ -68,3 +65,14 @@ jobs:
             PATCH=${VNUM3+1}
             new_tag=$VNUM1.$VNUM2.$PATCH
             echo $new_tag
+            #get current hash and see if it already has a tag
+            GIT_COMMIT=`git rev-parse HEAD`
+            NEEDS_TAG=`git describe --contains $GIT_COMMIT`
+            #only tag if no tag already (would be better if the git describe command above could have a silent option)
+            if [ -z "$NEEDS_TAG" ]; then
+                echo "Tagged with $NEW_TAG (Ignoring fatal:cannot describe - this means commit is untagged) "
+                git tag $NEW_TAG
+                git push --tags
+            else
+                echo "Already a tag on this commit"
+            fi    
