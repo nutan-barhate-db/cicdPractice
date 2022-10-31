@@ -6,7 +6,7 @@ on:
       - release/*
   workflow_dispatch:
 jobs:
-  release_tag:
+  create_initial_tag:
       runs-on: ubuntu-latest
       env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -16,7 +16,7 @@ jobs:
           with: 
             fetch-depth: 0
           
-        - name: Set Release tag to env
+        - name: Extract tag version from release branch name
           run: echo "RELEASE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
         - name: OUTPUT RELEASE_TAG
           id: extag
@@ -25,10 +25,8 @@ jobs:
            echo ${{ env.RELEASE_TAG }}
            tg=(${RELEASE_TAG//// })
            echo "ETAG=${tg[1]}.0" >> $GITHUB_ENV
-           
-          
-         
-        - name: Print etag
+                           
+        - name: Tag the commit and push to repo
           run: |
             echo $ETAG
             git config user.name "Github Action Bot"
