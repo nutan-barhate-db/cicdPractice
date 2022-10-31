@@ -6,17 +6,31 @@ on:
       - release/*
   workflow_dispatch:
 jobs:
-  release_tag:
+  create_initial_tag:
       runs-on: ubuntu-latest
+      env:
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
           with: 
             fetch-depth: 0
           
-        - name: Set Release tag to env
+        - name: Extract tag version from release branch name
           run: echo "RELEASE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
         - name: OUTPUT RELEASE_TAG
+          id: extag
           run: |
-           echo $RELEASE_TAG
+           echo $RELEASE_TAG5
            echo ${{ env.RELEASE_TAG }}
+           tg=(${RELEASE_TAG//// })
+           echo "ETAG=${tg[1]}.0" >> $GITHUB_ENV
+                           
+        - name: Tag the commit and push to repo
+          run: |
+            echo $ETAG
+            git config user.name "Github Action Bot"
+            git config user.email "<>"
+            git tag -a v${ETAG} -m "tag version v${ETAG}" 
+            git push -u origin v${ETAG}
+            git tag
