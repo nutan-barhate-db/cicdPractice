@@ -1,4 +1,4 @@
-name: Release2
+name: Release22
 
 on:
   pull_request:
