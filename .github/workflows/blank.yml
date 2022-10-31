@@ -66,4 +66,5 @@ jobs:
             VNUM2=${VERSION_BITS[1]}
             VNUM3=${VERSION_BITS[2]}
             PATCH=${VNUM3+1}
-            echo $VNUM1.$VNUM2.$PATCH
+            new_tag=$VNUM1.$VNUM2.$PATCH
+            echo $new_tag
