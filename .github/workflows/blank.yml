@@ -40,7 +40,8 @@ jobs:
             git tag
             
   increment_tag:
-      if: github.event_name == 'pull_request'
+      #if: github.event_name == 'pull_request'
+      if: "contains(github.event.head_commit.message, '[bugfix]')"
       runs-on: ubuntu-latest
       env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
