@@ -63,8 +63,8 @@ jobs:
             VNUM2=${VERSION_BITS[1]}
             VNUM3=${VERSION_BITS[2]}
             PATCH=${VNUM3+1}
-            new_tag=$VNUM1.$VNUM2.$PATCH
-            echo $new_tag
+            NEW_TAG=$VNUM1.$VNUM2.$PATCH
+            echo $NEW_TAG
             #get current hash and see if it already has a tag
             GIT_COMMIT=`git rev-parse HEAD`
             NEEDS_TAG=`git describe --contains $GIT_COMMIT`
