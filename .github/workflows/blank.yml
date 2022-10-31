@@ -2,6 +2,8 @@ name: Release2
 
 on:
   pull_request:
+    branches:
+    - release/*
   workflow_dispatch:
 jobs:
   create_initial_tag:
