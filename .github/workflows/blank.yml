@@ -35,3 +35,16 @@ jobs:
             git push -u origin v${ETAG}
             git tag
             
+  increment_tag:
+      if: github.event_name == 'pull_request'
+      runs-on: ubuntu-latest
+      env:
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+          with: 
+            fetch-depth: 0
+        - name: print
+          run: echo "test"
+          
