@@ -68,7 +68,7 @@ jobs:
             #get current hash and see if it already has a tag
             GIT_COMMIT=`git rev-parse HEAD`
             #NEEDS_TAG=`git describe --contains $GIT_COMMIT`
-            NEEDS_TAG=`git describe --exact-match $GIT_COMMIT`
+            NEEDS_TAG=eval(git describe --exact-match $GIT_COMMIT)
             
             echo $NEEDS_TAG
             
