@@ -68,11 +68,12 @@ jobs:
             #get current hash and see if it already has a tag
             GIT_COMMIT=`git rev-parse HEAD`
             #NEEDS_TAG=`git describe --contains $GIT_COMMIT`
-            NEEDS_TAG=`git describe --exact-match $GIT_COMMIT 2>/dev/null`
+            NEEDS_TAG=`git describe --exact-match $GIT_COMMIT`
             
             echo $NEEDS_TAG
             
-            if [ -z "$NEEDS_TAG" ]; then
+            if [ -z "$NEEDS_TAG" ]
+            then
                 echo "Tagged with $NEW_TAG (Ignoring fatal:cannot describe - this means commit is untagged) "
                 git tag $NEW_TAG
                 git push --tags
