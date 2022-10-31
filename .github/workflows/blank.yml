@@ -1,12 +1,11 @@
 name: Releasee
 
 on:
-  push:
-    branches:
-      - release/*
+  pull_request:
   workflow_dispatch:
 jobs:
   create_initial_tag:
+      if: github.event_name != "pull_request"
       runs-on: ubuntu-latest
       env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
