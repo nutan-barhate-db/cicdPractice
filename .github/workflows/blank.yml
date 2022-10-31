@@ -33,4 +33,4 @@ jobs:
             git config user.email "<>"
             git tag -a v${ETAG} -m "tag version v${ETAG}" 
             git push -u origin v${ETAG}
-            git tag
+          
