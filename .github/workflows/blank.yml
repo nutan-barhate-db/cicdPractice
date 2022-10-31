@@ -65,4 +65,4 @@ jobs:
             VNUM1=${VERSION_BITS[0]}
             VNUM2=${VERSION_BITS[1]}
             VNUM3=${VERSION_BITS[2]}
-            echo VNUM1.VNUM2.VNUM3
+            echo $VNUM1.$VNUM2.$VNUM3
